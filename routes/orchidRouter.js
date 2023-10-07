@@ -87,32 +87,35 @@ orchidRouter
         res.statusCode = 200;
         return res.json(data);
       })
-      .catch((err) => {
-        console.log("🚀 ~ file: orchidRouter.js:90 ~ .post ~ err:", err);
-      });
+      .catch((err) => {});
   });
 
 orchidRouter
   .route("/:orchidId/comments/:commentId")
   .get((req, res) => {
     Orchids.findById(req.params.orchidId).then((data) => {
-      res.json(data.comments.id(req.params.commentId))
+      return res.json(data.comments.id(req.params.commentId));
     });
   })
-  .post((req, res) => {
+  .put((req, res) => {
     Orchids.findById(req.params.orchidId)
       .then((data) => {
+        console.log(data);
+
         if (!data) {
+          console.log(data);
           return res.json("Not found");
         }
-        
-        
-
+        if (req.body.rating) {
+          data.comments.id(req.params.commentId).rating = req.body.rating;
+        }
+        if (req.body.comment) {
+          data.comments.id(req.params.commentId).comment = req.body.comment;
+        }
+        console.log(data);
 
         return res.json(data);
       })
-      .catch((err) => {
-        console.log("🚀 ~ file: orchidRouter.js:90 ~ .post ~ err:", err);
-      });
+      .catch((err) => {});
   });
 module.exports = orchidRouter;
