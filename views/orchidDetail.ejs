@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  <title>
+    <%= title %>
+  </title>
+</head>
+
+<body>
+  <div class="column">
+    <form method="post">
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input class="input" name="name" type="text" placeholder="name of orchid" value="<%= data.name %>" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Image</label>
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-success" name="image" type="text" placeholder="URI" value="<%= data.image %>" />
+        </div>
+      </div>
+      <img class="image is-64x64"  src="<%= data.image %>"/>
+
+      <div class="field">
+        <label class="label">Origin</label>
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-danger" name="origin" type="text" value="<%= data.origin %>" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Category</label>
+        <div class="control">
+          <div class="select">
+            <select name="category">
+              <% categoryData.forEach(item=>{ %>
+                <option value="<%= item.name %>" <%=JSON.stringify(item.name)===JSON.stringify(data.category) ? 'selected' : '' %>>
+                  <%= item.name %>
+                </option>
+                <% }) %>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-link" type="submit">Submit</button>
+        </div>
+        <div class="control">
+          <button class="button is-link is-light">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

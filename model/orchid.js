@@ -40,10 +40,14 @@ const orchidSchema = new Schema(
       type: String,
       require: true,
     },
+    image: {
+      type: String,
+      require: true,
+    },
     comments: [commentSchema],
   },
   { timestamps: true }
 );
 
-const Orchids = mongoose.model("Orchids", orchidSchema);
+const Orchids = mongoose.model("orchids", orchidSchema);
 module.exports = Orchids;

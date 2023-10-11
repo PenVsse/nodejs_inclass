@@ -5,7 +5,7 @@ const Orchids = require("../model/orchid");
 orchidRouter
   .route("/")
   .all((req, res, next) => {
-    res.StatusCode = 200;
+    res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
     next();
   })

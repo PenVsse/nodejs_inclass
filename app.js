@@ -7,7 +7,7 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 var orchidViewRouter = require("./routes/orchidViewRouter");
 const { default: mongoose } = require("mongoose");
-
+var methodOverride = require("method-override");
 var app = express();
 
 const url = "mongodb://localhost:27017/flowers";
@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-// app.use("/", indexRouter);
+app.use(methodOverride("X-HTTP-Method-Override")); // de form dung duoc method put,...
 app.use("/", orchidViewRouter);
 
 // catch 404 and forward to error handler
