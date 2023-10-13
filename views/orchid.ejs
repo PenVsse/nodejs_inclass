@@ -72,7 +72,7 @@
               <td><%= orchid.category %></td>
               <td>
                 <a href="<%= baseURL.baseURL %>/edit/<%= orchid.id %>">Edit</a>
-                <a href="<%= baseURL.baseURL %>/delete/<%= orchid.id %>"><button onclick="return confirm('xoa nha')">Delete</button></a>
+                <span id="deleteRow" href="#" value="<%= orchid.id %>">Delete</span>
               </td>
             </tr>
             <% }); %>
@@ -125,5 +125,26 @@
         </div>
       </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+      $("id").on("click", function () {
+        if (confirm("Bạn có chắc chắn muốn xóa?")) {
+          var xhr = new XMLHttpRequest();
+          xhr.open("DELETE", url, true);
+          xhr.onload = function () {
+            if (xhr.status === 200) {
+              console.log(xhr.responseText);
+              $(this).closest("tr").remove();
+            } else {
+              console.error("Lỗi:", xhr.status);
+            }
+          };
+          xhr.onerror = function () {
+            console.error("Lỗi kết nối");
+          };
+          xhr.send();
+        }
+      });
+    </script>
   </body>
 </html>

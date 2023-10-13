@@ -31,8 +31,10 @@ class orchidController {
     const orchid = new Orchids(req.body);
     orchid
       .save()
-      .then(() => res.redirect("/orchid"))
-      .catch((error) => {});
+      .then(() => res.redirect("/"))
+      .catch((error) => {
+        res.redirect("/");
+      });
   }
   formData(req, res, next) {
     const orchidId = req.params.orchidId;
@@ -50,10 +52,10 @@ class orchidController {
     });
   }
   remove(req, res, next) {
-    console.log("12313231");
-    // Orchids.findByIdAndDelete({ _id: req.params.orchidId }).then((data) => {
-    //   res.redirect("/");
-    // });
+    Orchids.deleteOne({}).then((data) => {
+      console.log(data);
+      res.send(data);
+    });
   }
 }
 module.exports = new orchidController();

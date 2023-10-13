@@ -25,7 +25,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(methodOverride("X-HTTP-Method-Override")); // de form dung duoc method put,...
 app.use("/", orchidViewRouter);
 
 // catch 404 and forward to error handler
